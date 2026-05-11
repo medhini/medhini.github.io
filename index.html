@@ -36,6 +36,48 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── Fixed Nav ──────────────────────────────────────────── */
+    .topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+    .topnav.scrolled {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+    .topnav-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topnav-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .topnav-links { display: flex; gap: 28px; }
+    .topnav-links a {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.18s;
+    }
+    .topnav-links a:hover { color: var(--accent); }
+
     /* ── Layout ─────────────────────────────────────────────── */
     .page {
       max-width: 860px;
@@ -160,16 +202,39 @@
 
     .paper {
       display: grid;
-      grid-template-columns: 110px 1fr;
+      grid-template-columns: 160px 1fr;
       gap: 24px;
       padding-bottom: 32px;
       border-bottom: 1px solid var(--border);
     }
     .paper:last-child { border-bottom: none; }
 
-    .paper-meta {
-      text-align: right;
-      padding-top: 4px;
+    .paper-thumb {
+      width: 160px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 6px;
+      display: block;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .paper-thumb-video {
+      width: 160px;
+      height: 110px;
+      border-radius: 6px;
+      display: block;
+      background: #000;
+      border: 1px solid var(--border);
+      object-fit: cover;
+    }
+
+    .paper-body {}
+
+    .paper-venue-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
     }
 
     .venue-badge {
@@ -182,11 +247,9 @@
       color: var(--accent);
       border-radius: 4px;
       padding: 3px 8px;
-      margin-bottom: 6px;
     }
 
     .paper-year {
-      display: block;
       font-size: 0.8rem;
       color: var(--muted);
     }
@@ -259,24 +322,35 @@
 
     /* ── Responsive ─────────────────────────────────────────── */
     @media (max-width: 640px) {
-      header { flex-direction: column; align-items: flex-start; gap: 12px; }
-      nav a:first-child { margin-left: 0; }
+      .topnav-name { font-size: 0.9rem; }
+      .topnav-links a { font-size: 0.8rem; }
       .hero { grid-template-columns: 1fr; gap: 28px; }
       .hero-photo img { width: 140px; height: 140px; }
       .hero-bio h1 { font-size: 2rem; }
-      .paper { grid-template-columns: 1fr; gap: 8px; }
-      .paper-meta { text-align: left; }
+      .paper { grid-template-columns: 1fr; gap: 12px; }
+      .paper-thumb, .paper-thumb-video { width: 100%; height: 160px; }
     }
   </style>
 </head>
 <body>
 
+<nav class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-name" href="#">Medhini Narasimhan</a>
+    <div class="topnav-links">
+      <a href="#research">Research</a>
+      <a href="https://medhini.github.io/files/Medhini_CV.pdf" target="_blank">CV</a>
+    </div>
+  </div>
+</nav>
+
 <div class="page">
 
   <!-- ── Hero ────────────────────────────────────── -->
-  <div class="hero" style="margin-top:56px;">
+  <div class="hero" style="margin-top:88px;">
     <div class="hero-photo">
-      <img src="images/medhini.png" alt="Medhini Narasimhan" />
+      <!-- Update path if your photo lives elsewhere, e.g. images/profile.jpg -->
+      <img src="images/profile.jpg" alt="Medhini Narasimhan" />
     </div>
     <div class="hero-bio">
       <h1>Medhini Narasimhan</h1>
@@ -350,11 +424,9 @@
 
       <!-- Paper 1 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">arXiv</span>
-          <span class="paper-year">2023</span>
-        </div>
+        <img class="paper-thumb" src="images/task_structure.png" alt="Task Structure" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">arXiv</span><span class="paper-year">2023</span></div>
           <div class="paper-title">Learning and Verification of Task Structure from Instructional Videos</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -375,11 +447,9 @@
 
       <!-- Paper 2 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">ECCV</span>
-          <span class="paper-year">2022</span>
-        </div>
+        <img class="paper-thumb" src="images/ivsum.png" alt="TL;DW" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">ECCV</span><span class="paper-year">2022</span></div>
           <div class="paper-title">TL;DW? Summarizing Instructional Videos with Task Relevance &amp; Cross-Modal Saliency</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -402,11 +472,9 @@
 
       <!-- Paper 3 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">NeurIPS</span>
-          <span class="paper-year">2021</span>
-        </div>
+        <img class="paper-thumb" src="images/clipit_model.png" alt="CLIP-It" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">NeurIPS</span><span class="paper-year">2021</span></div>
           <div class="paper-title">CLIP-It! Language-Guided Video Summarization</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -423,13 +491,14 @@
         </div>
       </div>
 
-      <!-- Paper 4 -->
+      <!-- Paper 4 — original used a <video> element -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">WACV</span>
-          <span class="paper-year">2022</span>
-        </div>
+        <video class="paper-thumb-video" autoplay muted loop playsinline>
+          <source src="images/afrocropbar.mp4" type="video/mp4" />
+          <img class="paper-thumb" src="images/afrocropbar.mp4" alt="Strumming to the Beat" />
+        </video>
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">WACV</span><span class="paper-year">2022</span></div>
           <div class="paper-title">Strumming to the Beat: Audio-Conditioned Contrastive Video Textures</div>
           <div class="paper-award">★ Best Paper, Honorable Mention</div>
           <div class="paper-authors">
@@ -451,13 +520,14 @@
         </div>
       </div>
 
-      <!-- Paper 5 -->
+      <!-- Paper 5 — original used a <video> element -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">ECCV</span>
-          <span class="paper-year">2020</span>
-        </div>
+        <video class="paper-thumb-video" autoplay muted loop playsinline>
+          <source src="images/roomnav.mp4" type="video/mp4" />
+          <img class="paper-thumb" src="images/roomnav.mp4" alt="Seeing the Un-Scene" />
+        </video>
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">ECCV</span><span class="paper-year">2020</span></div>
           <div class="paper-title">Seeing the Un-Scene: Learning Amodal Semantic Maps for Room Navigation</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -476,11 +546,9 @@
 
       <!-- Paper 6 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">NeurIPS</span>
-          <span class="paper-year">2018</span>
-        </div>
+        <img class="paper-thumb" src="images/nips18.jpg" alt="Out of the Box" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">NeurIPS</span><span class="paper-year">2018</span></div>
           <div class="paper-title">Out of the Box: Reasoning with Graph Convolution Nets for Factual Visual Question Answering</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -499,11 +567,9 @@
 
       <!-- Paper 7 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">ECCV</span>
-          <span class="paper-year">2018</span>
-        </div>
+        <img class="paper-thumb" src="images/eccv18.jpg" alt="Straight to the Facts" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">ECCV</span><span class="paper-year">2018</span></div>
           <div class="paper-title">Straight to the Facts: Learning Knowledge Base Retrieval for Factual Visual Question Answering</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -519,11 +585,9 @@
 
       <!-- Paper 8 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">MTAP</span>
-          <span class="paper-year">2017</span>
-        </div>
+        <img class="paper-thumb" src="images/mtap17.png" alt="Anomaly Detection" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">MTAP</span><span class="paper-year">2017</span></div>
           <div class="paper-title">Dynamic Video Anomaly Detection and Localization Using Sparse Denoising Autoencoders</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>,
@@ -539,11 +603,9 @@
 
       <!-- Paper 9 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">IJBIC</span>
-          <span class="paper-year">2018</span>
-        </div>
+        <img class="paper-thumb" src="images/ijbic18.svg" alt="EGA-FMC" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">IJBIC</span><span class="paper-year">2018</span></div>
           <div class="paper-title">EGA-FMC: Enhanced Genetic Algorithm Based Fuzzy K-Modes Clustering for Categorical Data</div>
           <div class="paper-authors">
             <strong>Medhini Narasimhan</strong>, Balaji Balasubramanian, Suryansh Kumar,
@@ -559,11 +621,9 @@
 
       <!-- Paper 10 -->
       <div class="paper">
-        <div class="paper-meta">
-          <span class="venue-badge">ISMB</span>
-          <span class="paper-year">2016</span>
-        </div>
+        <img class="paper-thumb" src="images/ismb.png" alt="Symptom Severity" />
         <div class="paper-body">
+          <div class="paper-venue-row"><span class="venue-badge">ISMB</span><span class="paper-year">2016</span></div>
           <div class="paper-title">Predicting Symptom Severity and Contagiousness of Respiratory Viral Infections</div>
           <div class="paper-award">★ Best Poster Award</div>
           <div class="paper-authors">
@@ -586,5 +646,12 @@
   </footer>
 
 </div><!-- /page -->
+
+<script>
+  const nav = document.getElementById('topnav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
 </body>
 </html>
