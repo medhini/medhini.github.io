@@ -197,6 +197,13 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .industry-projects { display: grid; gap: 16px; }
+    .industry-project { padding: 24px; background: var(--card); border: 1px solid var(--border); border-radius: 10px; }
+    .industry-project h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; }
+    .industry-project p { margin-bottom: 16px; }
+    .industry-project .industry-focus { color: var(--accent); font-size: 0.83rem; font-style: italic; margin: 4px 0 12px; }
+    #industry-work { scroll-margin-top: 76px; }
+
     /* Recent updates */
     .recent-updates { margin-bottom: 64px; }
     .updates-list { list-style: none; display: grid; gap: 20px; }
@@ -473,6 +480,31 @@
         <p>A personal milestone: promoted to <strong>Staff Research Scientist at Google DeepMind</strong>! 🎉</p>
       </li>
     </ul>
+  </section>
+
+  <!-- Selected industry work -->
+  <section id="industry-work" aria-labelledby="industry-heading" style="margin-bottom:64px;">
+    <h2 class="section-label" id="industry-heading">Selected Industry Work</h2>
+    <div class="industry-projects">
+      <article class="industry-project">
+        <h3>Gemini 4 Argon</h3>
+        <p class="industry-focus">· Evals · Post-training</p>
+        <p>Designed and built an internal benchmark inspired by SWE-bench, and developed metrics and methods to measure and improve SFT models’ climbability during RL.</p>
+        <div class="paper-links"><a href="https://ai.google.dev/gemini-api/docs/models/gemini-4-argon">Explore Argon</a><span>·</span><a href="https://aistudio.google.com/prompts/new_chat?model=gemini-4-argon">Try it in AI Studio</a></div>
+      </article>
+      <article class="industry-project">
+        <h3>Gemini Omni</h3>
+        <p class="industry-focus">· Evals Lead · Multimodal Generation</p>
+        <p>Led evaluations across multimodal understanding and generation, including the creation and editing of video from text, images, audio, and video.</p>
+        <div class="paper-links"><a href="https://deepmind.google/models/gemini-omni/">Explore Omni &amp; demos</a><span>·</span><a href="https://flow.google.com/">Try Google Flow</a></div>
+      </article>
+      <article class="industry-project">
+        <h3>Veo 1, 2 &amp; 3</h3>
+        <p class="industry-focus">· Pre-training · Post-training · Evaluation · Capabilities</p>
+        <p>Core contributor across three generations of Veo, with work spanning pre-training, image-to-video capabilities, and post-training. Led Veo’s evaluation efforts, combining human assessments and automated metrics to guide model development. Contributions included training-data optimization and supervised fine-tuning methods to improve generation quality.</p>
+        <div class="paper-links"><a href="https://deepmind.google/technologies/veo/">Explore Veo &amp; demos</a></div>
+      </article>
+    </div>
   </section>
 
   <!-- ── Research ─────────────────────────────────── -->
